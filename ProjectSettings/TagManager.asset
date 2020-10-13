@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Pipe
+  - ScoreZone
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -46,4 +49,7 @@ TagManager:
     locked: 0
   - name: PlayZone
     uniqueID: 2526819503
+    locked: 0
+  - name: UI
+    uniqueID: 1080577367
     locked: 0
