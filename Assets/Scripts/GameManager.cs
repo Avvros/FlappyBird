@@ -17,4 +17,9 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    public void StopGame()
+    {
+        Time.timeScale = 0;
+    }
 }

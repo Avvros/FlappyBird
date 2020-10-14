@@ -15,7 +15,6 @@ public class Score : MonoBehaviour
     void Update()
     {
         _scoreText.text = _score.ToString();
-        Debug.Log(_score);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

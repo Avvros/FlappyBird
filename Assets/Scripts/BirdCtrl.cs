@@ -17,15 +17,11 @@ public class BirdCtrl : MonoBehaviour
     }
     void Update()
     {
-        FlyUp();
     }
 
-    private void FlyUp()
+    public void FlyUp()
     {
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
-        {
-            _rb.velocity = Vector2.up * _flyUpForce;
-        }
+        _rb.velocity = Vector2.up * _flyUpForce;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
