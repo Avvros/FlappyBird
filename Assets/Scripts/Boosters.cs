@@ -39,11 +39,11 @@ public class Boosters : MonoBehaviour
         }
     }
 
-    public void DoActiateSheld()
+    public void ActiateSheld()
     {
-        StartCoroutine(ActiateSheld());
+        StartCoroutine(SheldActiator());
     }
-    IEnumerator ActiateSheld()
+    IEnumerator SheldActiator()
     {
         Time.timeScale = _thisTimeSpeed;
         _bM._sheldTimer.SetActive(true);
@@ -61,6 +61,31 @@ public class Boosters : MonoBehaviour
         if (_bM._bird != null)
         {
             _bM._bird.GetComponent<Collider2D>().tag = "Player";
+        }
+    }
+
+    public void ActivateNinjaMode()
+    {
+        StartCoroutine(NinjaModeActivator());
+    }
+    IEnumerator NinjaModeActivator()
+    {
+        Time.timeScale = _thisTimeSpeed;
+        _bM._ninjaTimer.SetActive(true);
+        _bM._ninjaMask.SetActive(true);
+        _bM._bird.GetComponent<CapsuleCollider2D>().enabled = false;
+        for (int i = 5; i > 0; i--)
+        {
+            _bM._ninjaTimer.GetComponent<Text>().text = i.ToString();
+            yield return new WaitForSecondsRealtime(1);
+        }
+
+        _bM._ninjaTimer.SetActive(false);
+        _bM._ninjaMask.SetActive(false);
+
+        if (_bM._bird != null)
+        {
+            _bM._bird.GetComponent<CapsuleCollider2D>().enabled = true;
         }
     }
 }

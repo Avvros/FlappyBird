@@ -8,12 +8,18 @@ using UnityEngine.UI;
 public class BoostersManager : MonoBehaviour
 {
     [SerializeField] private GameObject _boostersObj;
+
     [SerializeField] internal GameObject _bird;
     [SerializeField] internal GameObject _birdIdle;
     [SerializeField] internal GameObject _birdBlue;
+
     [SerializeField] internal GameObject _timeSlowerTimer;
+
     [SerializeField] internal GameObject _birdSheld;
     [SerializeField] internal GameObject _sheldTimer;
+
+    [SerializeField] internal GameObject _ninjaMask;
+    [SerializeField] internal GameObject _ninjaTimer;
 
     private Boosters _boosters;
 
@@ -34,7 +40,10 @@ public class BoostersManager : MonoBehaviour
                 _boosters.DoSlowDownTime();
                 break;
             case "Sheld":
-                _boosters.DoActiateSheld();
+                _boosters.ActiateSheld();
+                break;
+            case "NinjaMode":
+                _boosters.ActivateNinjaMode();
                 break;
             default:
                 break;
