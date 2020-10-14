@@ -26,12 +26,18 @@ public class BirdCtrl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.tag == "Pipe" || collision.collider.tag == "Ground")
+        
+        if(gameObject.GetComponent<Collider2D>().tag == "Player" && collision.collider.tag == "Pipe" || collision.collider.tag == "Ground")
         {
-            Destroy(gameObject);
-            Time.timeScale = 0;
-            _restartBtn.SetActive(true);
-            _failText.SetActive(true);
+            EndGame();
         }
+    }
+
+    internal void EndGame()
+    {
+        Destroy(gameObject);
+        Time.timeScale = 0;
+        _restartBtn.SetActive(true);
+        _failText.SetActive(true);
     }
 }

@@ -7,6 +7,7 @@ TagManager:
   - Pipe
   - ScoreZone
   - Ground
+  - SheldedPlayer
   layers:
   - Default
   - TransparentFX

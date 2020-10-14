@@ -16,11 +16,11 @@ public class PipeSpawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(2);
-            SpawnPipe(3, 7);
+            SpawnPipe(3.0f, 7.0f);
         }
     }
 
-    private void SpawnPipe(int rangeStart, int rangeEnd)
+    private void SpawnPipe(float rangeStart, float rangeEnd)
     {
         float rand = Random.Range(rangeStart, rangeEnd);
         GameObject newPipe = Instantiate(Pipe, new Vector3(4, rand, 0), Quaternion.identity);
