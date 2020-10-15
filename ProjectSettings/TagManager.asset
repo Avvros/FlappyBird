@@ -45,12 +45,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: BG
-    uniqueID: 1289576277
+  - name: Bg
+    uniqueID: 184372071
     locked: 0
   - name: PlayZone
-    uniqueID: 2526819503
+    uniqueID: 417385863
     locked: 0
   - name: UI
-    uniqueID: 1080577367
+    uniqueID: 3029068899
     locked: 0
