@@ -14,7 +14,8 @@ public class DeadZoneCtrl : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Player" || collision.collider.tag == "SheldedPlayer")
+        if (collision.collider.tag == "Player" || 
+            collision.collider.tag == "SheldedPlayer")
         {
             _birdCtrl.EndGame();
         }

@@ -1,18 +1,27 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static BoostersManager;
 
 public class Boosters : MonoBehaviour
 {
     [SerializeField] private BoostersManager _bM;
-    private float _thisTimeSpeed = 1f;
+    private float _thisTimeSpeed = 1f; // Буфер, хранящий текущее время.
 
+    /// <summary>
+    /// Активатор замедления времени.
+    /// </summary>
     public void DoSlowDownTime()
     {
+        if (_bM._timeSlowerTimer.activeInHierarchy == true)
+        {
+            Time.timeScale = 1;
+            return;
+        };
         StartCoroutine(SlowDownTime());
     }
+    /// <summary>
+    /// Корутина, замедления времени.
+    /// </summary>
     IEnumerator SlowDownTime()
     {
         _bM._timeSlowerTimer.SetActive(true);
@@ -39,10 +48,21 @@ public class Boosters : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Активатор щита.
+    /// </summary>
     public void ActiateSheld()
     {
+        if (_bM._sheldTimer.activeInHierarchy == true)
+        {
+            Time.timeScale = 1;
+            return;
+        }
         StartCoroutine(SheldActiator());
     }
+    /// <summary>
+    /// Корутина, применяющая щит.
+    /// </summary>
     IEnumerator SheldActiator()
     {
         Time.timeScale = _thisTimeSpeed;
@@ -63,11 +83,21 @@ public class Boosters : MonoBehaviour
             _bM._bird.GetComponent<Collider2D>().tag = "Player";
         }
     }
-
+    /// <summary>
+    /// Активатор режима ниндзи.
+    /// </summary>
     public void ActivateNinjaMode()
     {
+        if (_bM._ninjaTimer.activeInHierarchy == true)
+        {
+            Time.timeScale = 1;
+            return;
+        }
         StartCoroutine(NinjaModeActivator());
     }
+    /// <summary>
+    /// Корутина, для маски ниндзи.
+    /// </summary>
     IEnumerator NinjaModeActivator()
     {
         Time.timeScale = _thisTimeSpeed;

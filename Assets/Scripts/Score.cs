@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    private int _score;
+    internal int _score;
     [SerializeField] private Text _scoreText;
-    void Start()
+    private void Start()
     {
         _score = 0;
     }
 
-    void Update()
+    private void Update()
     {
         _scoreText.text = _score.ToString();
     }

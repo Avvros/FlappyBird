@@ -9,15 +9,23 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
     }
+    /// <summary>
+    /// Продолжает/запускает игру.
+    /// </summary>
     public void StartGame()
     {
         Time.timeScale = 1;
     }
+    /// <summary>
+    /// Перезапускает игру.
+    /// </summary>
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
+    /// <summary>
+    /// Заканчивает игру.
+    /// </summary>
     public void StopGame()
     {
         Time.timeScale = 0;
