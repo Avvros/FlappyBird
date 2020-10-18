@@ -109,7 +109,7 @@ public class BoostersManager : MonoBehaviour
     /// <param name="cost">Стоимость.</param>
     private void SetCostText(Text text, int cost)
     {
-        text.text = "Стоимость: " + cost.ToString() + "очков";
+        text.text = "Стоимость: " + cost.ToString() + " очков.";
     }
     /// <summary>
     /// Активирует анимацию показа текста неактивации способности.

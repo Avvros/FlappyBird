@@ -1239,17 +1239,17 @@ MonoBehaviour:
   _birdBlue: {fileID: 406538944}
   _timeSlowerIcon: {fileID: 1645662306}
   _timeSlowerTimer: {fileID: 2122267496}
-  _timeSlowerCost: 10
+  _timeSlowerCost: 5
   _timeSlowerCostText: {fileID: 1113075654}
   _birdSheldIcon: {fileID: 1833981159}
   _birdSheld: {fileID: 65492966}
   _sheldTimer: {fileID: 1763418036}
-  _sheldCost: 5
+  _sheldCost: 10
   _sheldCostText: {fileID: 2130970850}
   _ninjaMaskIcon: {fileID: 275969804}
   _ninjaMask: {fileID: 243836841}
   _ninjaTimer: {fileID: 443363024}
-  _ninjaMaskCost: 20
+  _ninjaMaskCost: 15
   _ninjaMaskCostText: {fileID: 2145426381}
 --- !u!1 &406538944
 GameObject:
@@ -1389,7 +1389,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.19651327, y: 0}
   m_AnchorMax: {x: 0.78248674, y: 0.28}
-  m_AnchoredPosition: {x: 3, y: 1}
+  m_AnchoredPosition: {x: 3.000001, y: 1}
   m_SizeDelta: {x: -6, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &433400266
@@ -2263,6 +2263,7 @@ MonoBehaviour:
   _flyUpForce: 4.8
   _restartBtn: {fileID: 2041547614}
   _failText: {fileID: 59329397}
+  _cameraViewLimit: 6
 --- !u!50 &627687129
 Rigidbody2D:
   serializedVersion: 4
@@ -2870,7 +2871,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.19651327, y: 0}
   m_AnchorMax: {x: 0.78248674, y: 0.28}
-  m_AnchoredPosition: {x: 3, y: 1}
+  m_AnchoredPosition: {x: 3.000001, y: 1}
   m_SizeDelta: {x: -6, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1170012342
