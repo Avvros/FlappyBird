@@ -4,17 +4,21 @@ using UnityEngine.UI;
 
 public class Boosters : MonoBehaviour
 {
-    [SerializeField] private BoostersManager _bM;
-    private float _thisTimeSpeed = 1f; // Буфер, хранящий текущее время.
+    [SerializeField] private BoostersManager _boosterManager;
+
+    private void FixedUpdate()
+    {
+        
+    }
 
     /// <summary>
     /// Активатор замедления времени.
     /// </summary>
     public void DoSlowDownTime()
     {
-        if (_bM._timeSlowerTimer.activeInHierarchy == true)
+        if (_boosterManager._timeSlowerTimer.activeInHierarchy == true)
         {
-            Time.timeScale = 1;
+            Time.timeScale = _boosterManager._thisTimeSpeed;
             return;
         };
         StartCoroutine(SlowDownTime());
@@ -24,27 +28,26 @@ public class Boosters : MonoBehaviour
     /// </summary>
     IEnumerator SlowDownTime()
     {
-        _bM._timeSlowerTimer.SetActive(true);
-        _bM._birdBlue.SetActive(true);
-        _bM._birdIdle.SetActive(false);
+        _boosterManager._timeSlowerTimer.SetActive(true);
+        _boosterManager._birdBlue.SetActive(true);
+        _boosterManager._birdIdle.SetActive(false);
 
-        _thisTimeSpeed = 0.5f;
-        Time.timeScale = _thisTimeSpeed;
+        _boosterManager._thisTimeSpeed /= 2;
+        Time.timeScale = _boosterManager._thisTimeSpeed;
         for (int i = 10; i > 0; i--)
         {
-            _bM._timeSlowerTimer.GetComponent<Text>().text = i.ToString();
+            _boosterManager._timeSlowerTimer.GetComponent<Text>().text = i.ToString();
             yield return new WaitForSecondsRealtime(1);
         }
 
+        _boosterManager._timeSlowerTimer.SetActive(false);
+        _boosterManager._birdBlue.SetActive(false);
+        _boosterManager._birdIdle.SetActive(true);
 
-        _bM._timeSlowerTimer.SetActive(false);
-        _bM._birdBlue.SetActive(false);
-        _bM._birdIdle.SetActive(true);
-
-        if (_bM._bird != null)
+        if (_boosterManager._bird != null)
         {
-            _thisTimeSpeed = 1f;
-            Time.timeScale = _thisTimeSpeed;
+            _boosterManager._thisTimeSpeed *= 2;
+            Time.timeScale = _boosterManager._thisTimeSpeed;
         }
     }
 
@@ -53,9 +56,9 @@ public class Boosters : MonoBehaviour
     /// </summary>
     public void ActiateSheld()
     {
-        if (_bM._sheldTimer.activeInHierarchy == true)
+        if (_boosterManager._sheldTimer.activeInHierarchy == true)
         {
-            Time.timeScale = 1;
+            Time.timeScale = _boosterManager._thisTimeSpeed;
             return;
         }
         StartCoroutine(SheldActiator());
@@ -65,22 +68,22 @@ public class Boosters : MonoBehaviour
     /// </summary>
     IEnumerator SheldActiator()
     {
-        Time.timeScale = _thisTimeSpeed;
-        _bM._sheldTimer.SetActive(true);
-        _bM._birdSheld.SetActive(true);
-        _bM._bird.GetComponent<Collider2D>().tag = "SheldedPlayer";
+        Time.timeScale = _boosterManager._thisTimeSpeed;
+        _boosterManager._sheldTimer.SetActive(true);
+        _boosterManager._birdSheld.SetActive(true);
+        _boosterManager._bird.GetComponent<Collider2D>().tag = "SheldedPlayer";
         for (int i = 15; i > 0; i--)
         {
-            _bM._sheldTimer.GetComponent<Text>().text = i.ToString();
+            _boosterManager._sheldTimer.GetComponent<Text>().text = i.ToString();
             yield return new WaitForSecondsRealtime(1);
         }
 
-        _bM._sheldTimer.SetActive(false);
-        _bM._birdSheld.SetActive(false);
+        _boosterManager._sheldTimer.SetActive(false);
+        _boosterManager._birdSheld.SetActive(false);
 
-        if (_bM._bird != null)
+        if (_boosterManager._bird != null)
         {
-            _bM._bird.GetComponent<Collider2D>().tag = "Player";
+            _boosterManager._bird.GetComponent<Collider2D>().tag = "Player";
         }
     }
     /// <summary>
@@ -88,9 +91,9 @@ public class Boosters : MonoBehaviour
     /// </summary>
     public void ActivateNinjaMode()
     {
-        if (_bM._ninjaTimer.activeInHierarchy == true)
+        if (_boosterManager._ninjaTimer.activeInHierarchy == true)
         {
-            Time.timeScale = 1;
+            Time.timeScale = _boosterManager._thisTimeSpeed;
             return;
         }
         StartCoroutine(NinjaModeActivator());
@@ -100,22 +103,22 @@ public class Boosters : MonoBehaviour
     /// </summary>
     IEnumerator NinjaModeActivator()
     {
-        Time.timeScale = _thisTimeSpeed;
-        _bM._ninjaTimer.SetActive(true);
-        _bM._ninjaMask.SetActive(true);
-        _bM._bird.GetComponent<CapsuleCollider2D>().enabled = false;
+        Time.timeScale = _boosterManager._thisTimeSpeed;
+        _boosterManager._ninjaTimer.SetActive(true);
+        _boosterManager._ninjaMask.SetActive(true);
+        _boosterManager._bird.GetComponent<CapsuleCollider2D>().enabled = false;
         for (int i = 5; i > 0; i--)
         {
-            _bM._ninjaTimer.GetComponent<Text>().text = i.ToString();
+            _boosterManager._ninjaTimer.GetComponent<Text>().text = i.ToString();
             yield return new WaitForSecondsRealtime(1);
         }
 
-        _bM._ninjaTimer.SetActive(false);
-        _bM._ninjaMask.SetActive(false);
+        _boosterManager._ninjaTimer.SetActive(false);
+        _boosterManager._ninjaMask.SetActive(false);
 
-        if (_bM._bird != null)
+        if (_boosterManager._bird != null)
         {
-            _bM._bird.GetComponent<CapsuleCollider2D>().enabled = true;
+            _boosterManager._bird.GetComponent<CapsuleCollider2D>().enabled = true;
         }
     }
 }

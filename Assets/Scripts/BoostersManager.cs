@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class BoostersManager : MonoBehaviour
 {
     [SerializeField] private GameObject _boostersObj;
-    [SerializeField] private GameObject _scoreCounterOnBird; // Счёт, хранящийся в птице.
+    [SerializeField] private GameObject _scoreCounter;
+    private Score _scoreCounterHandler;
     [SerializeField] private GameObject _doNotUseText; // Текст для несрабатывания способностей.
     private Animator anim_doNotUseText;
    [Header("Skins")]
@@ -17,6 +18,7 @@ public class BoostersManager : MonoBehaviour
     [SerializeField] internal GameObject _timeSlowerTimer;
     [SerializeField] internal int _timeSlowerCost = 15;
     [SerializeField] internal Text _timeSlowerCostText;
+    internal bool _isTimeSlow = false;
     [Header("Sheld")]
     [SerializeField] internal GameObject _birdSheldIcon;
     [SerializeField] internal GameObject _birdSheld;
@@ -32,10 +34,17 @@ public class BoostersManager : MonoBehaviour
 
     private Boosters _boosters; // Объект, хранящий иконки способностей.
 
+    [SerializeField] private GameObject _gameManager;
+    GameManager _gameManagerHanler;
+    internal float _thisTimeSpeed = 1f; // Буфер, хранящий текущее время.
+
+
     void Start()
     {
         _boosters = _boostersObj.GetComponent<Boosters>();
+        _gameManagerHanler = _gameManager.GetComponent<GameManager>();
         anim_doNotUseText = _doNotUseText.GetComponent<Animator>();
+        _scoreCounterHandler = _scoreCounter.GetComponent<Score>();
         SetCostText(_timeSlowerCostText, _timeSlowerCost);
         SetCostText(_sheldCostText, _sheldCost);
         SetCostText(_ninjaMaskCostText, _ninjaMaskCost);
@@ -47,6 +56,14 @@ public class BoostersManager : MonoBehaviour
         {
             HideBoosters();
         }
+    }
+    public void ChangeThisTimeSpeed()
+    {
+        if (_isTimeSlow)
+        {
+            _thisTimeSpeed = _gameManagerHanler._gameSpeedMultiplayer / 2;
+        }
+        _thisTimeSpeed = _gameManagerHanler._gameSpeedMultiplayer;
     }
 
     /// <summary>
@@ -81,7 +98,7 @@ public class BoostersManager : MonoBehaviour
         {
             ShowDoNotUseText();
             Invoke("HideDoNotUseText", 2); // Через две секунды активирует анимацию скрытного текста.
-            Time.timeScale = 1;
+            Time.timeScale = _thisTimeSpeed;
         }
     }
     /// <summary>
@@ -92,11 +109,12 @@ public class BoostersManager : MonoBehaviour
     /// <returns>Результат проверки на достаточное количество очков.</returns>
     private bool GetScore(int boosterCost, out bool _isBoosterUsed)
     {
-        int _score = _scoreCounterOnBird.GetComponent<Score>()._score;
+        if (_scoreCounterHandler == null) return _isBoosterUsed = false;
 
-        if(_score - boosterCost >= 0)
+        int _score = _scoreCounterHandler._score;
+        if (_score - boosterCost >= 0)
         {
-            _scoreCounterOnBird.GetComponent<Score>()._score -= boosterCost;
+            _scoreCounterHandler._score -= boosterCost;
             return _isBoosterUsed = true;
         }
 
@@ -109,6 +127,7 @@ public class BoostersManager : MonoBehaviour
     /// <param name="cost">Стоимость.</param>
     private void SetCostText(Text text, int cost)
     {
+        if (text == null) return;
         text.text = "Стоимость: " + cost.ToString() + " очков.";
     }
     /// <summary>
@@ -123,7 +142,6 @@ public class BoostersManager : MonoBehaviour
     /// </summary>
     private void HideDoNotUseText()
     {
-        Debug.Log("HideDoNotUseText");
         anim_doNotUseText.SetBool("ShowDoNotUse", false);
     }
 }
