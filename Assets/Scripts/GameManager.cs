@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public UnityEvent OnGameSpeedChange;
 
     [SerializeField] private GameObject _scoreCounter;
+	[SerializeField] private GameObject _boosterManager;
     [SerializeField] private GameObject _darkMask;
 
     [SerializeField] private int _difficult = 1;
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         Time.timeScale = 1 * _gameSpeedMultiplayer;
+		_boosterManager.GetComponent<BoostersManager>().ChangeBoostersCondition(true);
     }
 
     /// <summary>

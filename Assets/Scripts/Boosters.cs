@@ -6,9 +6,38 @@ public class Boosters : MonoBehaviour
 {
     [SerializeField] private BoostersManager _boosterManager;
 
-    private void FixedUpdate()
+    private void ActivateElems(GameObject[] elems)
     {
-        
+        foreach (var elem in elems)
+        {
+            elem.SetActive(true);
+        }
+    }
+    private void DeActivateElems(GameObject[] elems)
+    {
+        foreach (var elem in elems)
+        {
+            elem.SetActive(false);
+        }
+    }
+    private void ReverseElemsContition(GameObject[] elems)
+    {
+        foreach (var elem in elems)
+        {
+            if (elem.activeInHierarchy)
+            {
+                elem.SetActive(false);
+            }
+            else
+            {
+                elem.SetActive(true);
+            }
+        }
+    }
+
+    private void SetTimeAsThisTimeSpeed()
+    {
+        Time.timeScale = _boosterManager._thisTimeSpeed;
     }
 
     /// <summary>
@@ -28,26 +57,32 @@ public class Boosters : MonoBehaviour
     /// </summary>
     IEnumerator SlowDownTime()
     {
-        _boosterManager._timeSlowerTimer.SetActive(true);
-        _boosterManager._birdBlue.SetActive(true);
-        _boosterManager._birdIdle.SetActive(false);
-
+        ActivateElems(new GameObject[]{
+            _boosterManager._timeSlowerTimer, 
+            _boosterManager._birdBlue
+        });
+        DeActivateElems(new GameObject[] {
+         _boosterManager._birdIdle
+        });
         _boosterManager._thisTimeSpeed /= 2;
-        Time.timeScale = _boosterManager._thisTimeSpeed;
-        for (int i = 10; i > 0; i--)
+        SetTimeAsThisTimeSpeed();
+
+        for (int i = _boosterManager._timeSlowerDuration; i > 0; i--)
         {
             _boosterManager._timeSlowerTimer.GetComponent<Text>().text = i.ToString();
             yield return new WaitForSecondsRealtime(1);
         }
 
-        _boosterManager._timeSlowerTimer.SetActive(false);
-        _boosterManager._birdBlue.SetActive(false);
-        _boosterManager._birdIdle.SetActive(true);
-
+        ReverseElemsContition(new GameObject[]
+        {
+            _boosterManager._timeSlowerTimer,
+            _boosterManager._birdBlue,
+            _boosterManager._birdIdle
+        });
         if (_boosterManager._bird != null)
         {
             _boosterManager._thisTimeSpeed *= 2;
-            Time.timeScale = _boosterManager._thisTimeSpeed;
+            SetTimeAsThisTimeSpeed();
         }
     }
 
@@ -58,7 +93,7 @@ public class Boosters : MonoBehaviour
     {
         if (_boosterManager._sheldTimer.activeInHierarchy == true)
         {
-            Time.timeScale = _boosterManager._thisTimeSpeed;
+            SetTimeAsThisTimeSpeed();
             return;
         }
         StartCoroutine(SheldActiator());
@@ -68,19 +103,25 @@ public class Boosters : MonoBehaviour
     /// </summary>
     IEnumerator SheldActiator()
     {
-        Time.timeScale = _boosterManager._thisTimeSpeed;
-        _boosterManager._sheldTimer.SetActive(true);
-        _boosterManager._birdSheld.SetActive(true);
+        SetTimeAsThisTimeSpeed();
+        ActivateElems(new GameObject[]
+        {
+            _boosterManager._sheldTimer,
+            _boosterManager._birdSheld
+        });
         _boosterManager._bird.GetComponent<Collider2D>().tag = "SheldedPlayer";
-        for (int i = 15; i > 0; i--)
+
+        for (int i = _boosterManager._sheldDuration; i > 0; i--)
         {
             _boosterManager._sheldTimer.GetComponent<Text>().text = i.ToString();
             yield return new WaitForSecondsRealtime(1);
         }
 
-        _boosterManager._sheldTimer.SetActive(false);
-        _boosterManager._birdSheld.SetActive(false);
-
+        ReverseElemsContition(new GameObject[]
+        {
+            _boosterManager._sheldTimer,
+            _boosterManager._birdSheld
+        });
         if (_boosterManager._bird != null)
         {
             _boosterManager._bird.GetComponent<Collider2D>().tag = "Player";
@@ -93,7 +134,7 @@ public class Boosters : MonoBehaviour
     {
         if (_boosterManager._ninjaTimer.activeInHierarchy == true)
         {
-            Time.timeScale = _boosterManager._thisTimeSpeed;
+            SetTimeAsThisTimeSpeed();
             return;
         }
         StartCoroutine(NinjaModeActivator());
@@ -103,18 +144,68 @@ public class Boosters : MonoBehaviour
     /// </summary>
     IEnumerator NinjaModeActivator()
     {
-        Time.timeScale = _boosterManager._thisTimeSpeed;
-        _boosterManager._ninjaTimer.SetActive(true);
-        _boosterManager._ninjaMask.SetActive(true);
+        SetTimeAsThisTimeSpeed();
+        ActivateElems(new GameObject[]
+        {
+            _boosterManager._ninjaTimer,
+            _boosterManager._ninjaMask
+        });
         _boosterManager._bird.GetComponent<CapsuleCollider2D>().enabled = false;
-        for (int i = 5; i > 0; i--)
+
+        for (int i = _boosterManager._ninjaMaskDuration; i > 0; i--)
         {
             _boosterManager._ninjaTimer.GetComponent<Text>().text = i.ToString();
             yield return new WaitForSecondsRealtime(1);
         }
 
-        _boosterManager._ninjaTimer.SetActive(false);
-        _boosterManager._ninjaMask.SetActive(false);
+        ReverseElemsContition(new GameObject[]
+        {
+            _boosterManager._ninjaTimer,
+            _boosterManager._ninjaMask
+        });
+        if (_boosterManager._bird != null)
+        {
+            _boosterManager._bird.GetComponent<CapsuleCollider2D>().enabled = true;
+        }
+    }
+    /// <summary>
+    /// Активатор уменьшения птицы.
+    /// </summary>
+    public void ActivateReduceBird()
+    {
+        if (_boosterManager._reduceBirdTimer.activeInHierarchy == true)
+        {
+            SetTimeAsThisTimeSpeed();
+            return;
+        }
+        StartCoroutine(ReduceBirdActivator());
+    }
+    /// <summary>
+    /// Корутина, для уменьшения птицы.
+    /// </summary>
+    IEnumerator ReduceBirdActivator()
+    {
+        SetTimeAsThisTimeSpeed(); 
+        ActivateElems(new GameObject[]
+        {
+            _boosterManager._reduceBirdTimer
+        });
+        _boosterManager._bird.transform.localScale /= 2;
+        _boosterManager._bird.GetComponent<Rigidbody2D>().gravityScale /= 1.5f;
+
+
+        for (int i = _boosterManager._reduceBirdDuration; i > 0; i--)
+        {
+            _boosterManager._reduceBirdTimer.GetComponent<Text>().text = i.ToString();
+            yield return new WaitForSecondsRealtime(1);
+        }
+
+        DeActivateElems(new GameObject[]
+        {
+            _boosterManager._reduceBirdTimer
+        });
+        _boosterManager._bird.transform.localScale *= 2;
+        _boosterManager._bird.GetComponent<Rigidbody2D>().gravityScale *= 1.5f;
 
         if (_boosterManager._bird != null)
         {

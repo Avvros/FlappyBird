@@ -4,6 +4,12 @@ using UnityEngine.UI;
 
 public class BoostersManager : MonoBehaviour
 {
+    private Boosters _boosters; // Объект, хранящий иконки способностей.
+
+    [SerializeField] private GameObject _gameManager;
+    GameManager _gameManagerHanler;
+    internal float _thisTimeSpeed = 1f; // Буфер, хранящий текущее время.
+
     [SerializeField] private GameObject _boostersObj;
     [SerializeField] private GameObject _scoreCounter;
     private Score _scoreCounterHandler;
@@ -18,6 +24,7 @@ public class BoostersManager : MonoBehaviour
     [SerializeField] internal GameObject _timeSlowerTimer;
     [SerializeField] internal int _timeSlowerCost = 15;
     [SerializeField] internal Text _timeSlowerCostText;
+    [SerializeField] internal int _timeSlowerDuration = 10;
     internal bool _isTimeSlow = false;
     [Header("Sheld")]
     [SerializeField] internal GameObject _birdSheldIcon;
@@ -25,36 +32,45 @@ public class BoostersManager : MonoBehaviour
     [SerializeField] internal GameObject _sheldTimer;
     [SerializeField] internal int _sheldCost = 5;
     [SerializeField] internal Text _sheldCostText;
+    [SerializeField] internal int _sheldDuration = 15;
     [Header("Ninja Mode")]
     [SerializeField] internal GameObject _ninjaMaskIcon;
     [SerializeField] internal GameObject _ninjaMask;
     [SerializeField] internal GameObject _ninjaTimer;
     [SerializeField] internal int _ninjaMaskCost = 20;
     [SerializeField] internal Text _ninjaMaskCostText;
-
-    private Boosters _boosters; // Объект, хранящий иконки способностей.
-
-    [SerializeField] private GameObject _gameManager;
-    GameManager _gameManagerHanler;
-    internal float _thisTimeSpeed = 1f; // Буфер, хранящий текущее время.
+    [SerializeField] internal int _ninjaMaskDuration = 5;
+    [Header("Reduce Bird")]
+    [SerializeField] internal GameObject _reduceBirdIcon;
+    [SerializeField] internal GameObject _reduceBirdTimer;
+    [SerializeField] internal int _reduceBirdCost = 15;
+    [SerializeField] internal Text _reduceBirdCostText;
+    [SerializeField] internal int _reduceBirdDuration = 10;
 
 
     void Start()
     {
+        // Не трогай!
         _boosters = _boostersObj.GetComponent<Boosters>();
         _gameManagerHanler = _gameManager.GetComponent<GameManager>();
         anim_doNotUseText = _doNotUseText.GetComponent<Animator>();
         _scoreCounterHandler = _scoreCounter.GetComponent<Score>();
+
+        
+        // Доавлять при создании способности!!!
         SetCostText(_timeSlowerCostText, _timeSlowerCost);
         SetCostText(_sheldCostText, _sheldCost);
         SetCostText(_ninjaMaskCostText, _ninjaMaskCost);
+        SetCostText(_reduceBirdCostText, _reduceBirdCost);
+		
+		ChangeBoostersCondition(false);
     }
 
     void Update()
     {
         if (_bird == null)
         {
-            HideBoosters();
+            ChangeBoostersCondition(false);
         }
     }
     public void ChangeThisTimeSpeed()
@@ -65,15 +81,15 @@ public class BoostersManager : MonoBehaviour
         }
         _thisTimeSpeed = _gameManagerHanler._gameSpeedMultiplayer;
     }
-
     /// <summary>
     /// Скрыть способности.
     /// </summary>
-    private void HideBoosters()
+    internal void ChangeBoostersCondition(bool condition)
     {
-        _timeSlowerIcon.SetActive(false);
-        _birdSheldIcon.SetActive(false);
-        _ninjaMaskIcon.SetActive(false);
+		_timeSlowerIcon.SetActive(condition);
+		_birdSheldIcon.SetActive(condition);
+		_ninjaMaskIcon.SetActive(condition);
+		_reduceBirdIcon.SetActive(condition);
     }
     /// <summary>
     /// Использовать способность.
@@ -92,6 +108,9 @@ public class BoostersManager : MonoBehaviour
                 break;
             case "NinjaMode":
                 if (GetScore(_ninjaMaskCost, out _isBoosterUsed)) _boosters.ActivateNinjaMode();
+                break;
+                    case "ReduceBird":
+                if (GetScore(_reduceBirdCost, out _isBoosterUsed)) _boosters.ActivateReduceBird();
                 break;
         }
         if(!_isBoosterUsed)
