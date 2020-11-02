@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -15,7 +14,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private int _difficult = 1;
     [SerializeField] private int _coveredScore;
-    [SerializeField] internal float _gameSpeedMultiplayer = 1;
+    [SerializeField] internal float GameSpeedMultiplayer = 1;
+
+    [SerializeField] public bool GameIsStopped = false;
 
     private void Start()
     {
@@ -36,7 +37,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
-        Time.timeScale = 1 * _gameSpeedMultiplayer;
+        GameIsStopped = false;
+        Time.timeScale = 1 * GameSpeedMultiplayer;
 		_boosterManager.GetComponent<BoostersManager>().ChangeBoostersCondition(true);
     }
 
@@ -53,6 +55,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void StopGame()
     {
+        GameIsStopped = true;
         Time.timeScale = 0;
     }
 
@@ -65,7 +68,7 @@ public class GameManager : MonoBehaviour
 
         bool isDifficultChange = false;
         float _calculatedDifficult = _difficult;
-        _coveredScore = _scoreCounter.GetComponent<Score>()._coveredScore;
+        _coveredScore = _scoreCounter.GetComponent<Score>().CoveredScoreCount;
 
         switch (_coveredScore)
         {
@@ -97,24 +100,24 @@ public class GameManager : MonoBehaviour
         switch (_difficult)
         {
             case 2:
-                _gameSpeedMultiplayer = 1.1f;
+                GameSpeedMultiplayer = 1.1f;
                 break;
             case 3:
-                _gameSpeedMultiplayer = 1.2f;
+                GameSpeedMultiplayer = 1.2f;
                 break;
             case 4:
-                _gameSpeedMultiplayer = 1.3f;
+                GameSpeedMultiplayer = 1.3f;
                 break;
             case 5:
-                _gameSpeedMultiplayer = 1.4f;
+                GameSpeedMultiplayer = 1.4f;
                 break;
             default:
-                _gameSpeedMultiplayer = 1f;
+                GameSpeedMultiplayer = 1f;
                 break;
         }
-        if(Time.timeScale != 0 && Time.timeScale != _gameSpeedMultiplayer && Time.timeScale != _gameSpeedMultiplayer/2)
+        if(Time.timeScale != 0 && Time.timeScale != GameSpeedMultiplayer && Time.timeScale != GameSpeedMultiplayer/2)
         {
-            Time.timeScale = _gameSpeedMultiplayer;
+            Time.timeScale = GameSpeedMultiplayer;
 
             OnGameSpeedChange.Invoke();
             Debug.Log("OnGameSpeedChange.Invoke()");

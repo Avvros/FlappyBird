@@ -1,30 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    [SerializeField] internal int _score;
-    [SerializeField] internal int _coveredScore;
+    [SerializeField] internal int ScoreCount;
+    [SerializeField] internal int CoveredScoreCount;
     [SerializeField] private Text _scoreText;
     [SerializeField] private Text _coveredScoreText;
     private void Start()
     {
-        _score = 0;
-        _coveredScore = 0;
+        ScoreCount = 0;
+        CoveredScoreCount = 0;
     }
 
     private void Update()
     {
-        _scoreText.text = _score.ToString();
-        _coveredScoreText.text = _coveredScore.ToString();
+        _scoreText.text = ScoreCount.ToString();
+        _coveredScoreText.text = CoveredScoreCount.ToString();
 
     }
 
     public void AddScore()
     {
-        _score++;
-        _coveredScore++;
+        ScoreCount++;
+        CoveredScoreCount++;
     }
 }

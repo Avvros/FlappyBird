@@ -6,7 +6,7 @@ public class BirdCtrl : MonoBehaviour
 {
     public UnityEvent OnScoreZoneEnter;
 
-    private Rigidbody2D _rb;
+    private Rigidbody2D _rigidbody;
     [SerializeField] private float _flyUpForce = 4.0f;
     [SerializeField] private GameObject _restartBtn;
     [SerializeField] private GameObject _failText;
@@ -14,7 +14,7 @@ public class BirdCtrl : MonoBehaviour
     [SerializeField] private int _cameraViewLimit = 6;
     void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
         _failText.SetActive(false);
         _restartBtn.SetActive(false);
         _flyManager.SetActive(false);
@@ -44,7 +44,7 @@ public class BirdCtrl : MonoBehaviour
     /// </summary>
     public void FlyUp()
     {
-        _rb.velocity = Vector2.up * _flyUpForce;
+        _rigidbody.velocity = Vector2.up * _flyUpForce;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -67,7 +67,7 @@ public class BirdCtrl : MonoBehaviour
     }
 
     /// <summary>
-    /// Заканчивание игры.
+    /// Заканчивание игру.
     /// </summary>
     internal void EndGame()
     {

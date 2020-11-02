@@ -811,7 +811,7 @@ RectTransform:
   m_Children:
   - {fileID: 443363025}
   m_Father: {fileID: 1533021893}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.011100832, y: 0.61583114}
   m_AnchorMax: {x: 0.11744959, y: 0.6567614}
@@ -897,6 +897,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 378745304}
+        m_TargetAssemblyTypeName: BoostersManager, Assembly-CSharp
+        m_MethodName: SetBoostersIconsActivity
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &275969807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -935,6 +947,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 275969804}
   m_CullTransparentMesh: 0
+--- !u!1 &313466972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 313466973}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &313466973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313466972}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.7775977, y: -2.9122286, z: -10.233042}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1883401864}
+  - {fileID: 378745303}
+  - {fileID: 332762428}
+  - {fileID: 523979390}
+  - {fileID: 493757135}
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &332762426
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,12 +1019,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 332762426}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3150574, y: 0.35200337, z: -1.8716915}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.0926552, y: 3.264232, z: 8.36135}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 313466973}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &339842036
 GameObject:
@@ -1259,7 +1306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 361532349}
   m_Layer: 5
-  m_Name: FlyManager
+  m_Name: FlyTapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1310,16 +1357,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 378745302}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 100.23304}
+  m_LocalScale: {x: 0.0125, y: 0.0125, z: 0.0125}
   m_Children: []
-  m_Father: {fileID: 1533021893}
-  m_RootOrder: 0
+  m_Father: {fileID: 313466973}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.3838477, y: 2.9059787}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &378745304
@@ -1334,35 +1381,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d2ac1638cb18c4ba6fab05a0ec8ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameManager: {fileID: 523979388}
+  GameManager: {fileID: 523979388}
   _boostersObj: {fileID: 1533021892}
   _scoreCounter: {fileID: 1883401863}
   _doNotUseText: {fileID: 1807764890}
-  _bird: {fileID: 627687123}
-  _birdIdle: {fileID: 488729490}
-  _birdBlue: {fileID: 406538944}
-  _timeSlowerIcon: {fileID: 1645662306}
-  _timeSlowerTimer: {fileID: 2122267496}
-  _timeSlowerCost: 5
-  _timeSlowerCostText: {fileID: 1113075654}
-  _timeSlowerDuration: 10
-  _birdSheldIcon: {fileID: 1833981159}
-  _birdSheld: {fileID: 65492966}
-  _sheldTimer: {fileID: 1763418036}
-  _sheldCost: 10
-  _sheldCostText: {fileID: 2130970850}
-  _sheldDuration: 15
-  _ninjaMaskIcon: {fileID: 275969804}
-  _ninjaMask: {fileID: 243836841}
-  _ninjaTimer: {fileID: 443363024}
-  _ninjaMaskCost: 15
-  _ninjaMaskCostText: {fileID: 2145426381}
-  _ninjaMaskDuration: 5
-  _reduceBirdIcon: {fileID: 1630102209}
-  _reduceBirdTimer: {fileID: 1649822295}
-  _reduceBirdCost: 20
-  _reduceBirdCostText: {fileID: 987120126}
-  _reduceBirdDuration: 10
+  Bird: {fileID: 627687123}
+  BirdIdle: {fileID: 488729490}
+  BirdBlue: {fileID: 406538944}
+  TimeSlowerIcon: {fileID: 1645662306}
+  TimeSlowerTimer: {fileID: 2122267496}
+  TimeSlowerCost: 7
+  TimeSlowerCostText: {fileID: 1113075654}
+  TimeSlowerDuration: 10
+  BirdSheldIcon: {fileID: 1833981159}
+  BirdSheld: {fileID: 65492966}
+  SheldTimer: {fileID: 1763418036}
+  SheldCost: 10
+  SheldCostText: {fileID: 2130970850}
+  SheldDuration: 7
+  NinjaMaskIcon: {fileID: 275969804}
+  NinjaMask: {fileID: 243836841}
+  NinjaTimer: {fileID: 443363024}
+  NinjaMaskCost: 15
+  NinjaMaskCostText: {fileID: 2145426381}
+  NinjaMaskDuration: 5
+  ReduceBirdIcon: {fileID: 1630102209}
+  ReduceBirdTimer: {fileID: 1649822295}
+  ReduceBirdCost: 15
+  ReduceBirdCostText: {fileID: 987120126}
+  ReduceBirdDuration: 10
 --- !u!1 &406538944
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,6 +1621,18 @@ MonoBehaviour:
       - m_Target: {fileID: 361532348}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 378745304}
+        m_TargetAssemblyTypeName: BoostersManager, Assembly-CSharp
+        m_MethodName: SetBoostersIconsActivity
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1941,12 +2000,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 493757132}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.7775977, y: 2.9122286, z: 10.233042}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 313466973}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -2080,7 +2139,8 @@ MonoBehaviour:
   _darkMask: {fileID: 910027122}
   _difficult: 1
   _coveredScore: 0
-  _gameSpeedMultiplayer: 1
+  GameSpeedMultiplayer: 1
+  GameIsStopped: 0
 --- !u!4 &523979390
 Transform:
   m_ObjectHideFlags: 0
@@ -2088,12 +2148,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 523979388}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.14031902, y: -2.12376, z: -2.7277443}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.9179168, y: 0.7884686, z: 7.5052977}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 313466973}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &557549542
 GameObject:
@@ -2282,6 +2342,18 @@ MonoBehaviour:
       - m_Target: {fileID: 361532348}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 378745304}
+        m_TargetAssemblyTypeName: BoostersManager, Assembly-CSharp
+        m_MethodName: SetBoostersIconsActivity
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2951,7 +3023,7 @@ GameObject:
   - component: {fileID: 910027124}
   - component: {fileID: 910027123}
   m_Layer: 0
-  m_Name: ScreenDarker
+  m_Name: ScreenDimmer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3020,7 +3092,7 @@ Transform:
   m_LocalScale: {x: 5.851054, y: 5.851054, z: 5.851054}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &923566893
 GameObject:
@@ -3583,6 +3655,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 378745304}
+        m_TargetAssemblyTypeName: BoostersManager, Assembly-CSharp
+        m_MethodName: SetBoostersIconsActivity
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1170012343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3884,6 +3968,18 @@ MonoBehaviour:
       - m_Target: {fileID: 361532348}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 378745304}
+        m_TargetAssemblyTypeName: BoostersManager, Assembly-CSharp
+        m_MethodName: SetBoostersIconsActivity
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4355,7 +4451,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 378745303}
   - {fileID: 1645662307}
   - {fileID: 1833981160}
   - {fileID: 275969805}
@@ -4494,7 +4589,7 @@ RectTransform:
   - {fileID: 654311688}
   - {fileID: 1010511482}
   m_Father: {fileID: 1533021893}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.011100832, y: 0.53749686}
   m_AnchorMax: {x: 0.11744959, y: 0.58050317}
@@ -4571,6 +4666,18 @@ MonoBehaviour:
       - m_Target: {fileID: 361532348}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 378745304}
+        m_TargetAssemblyTypeName: BoostersManager, Assembly-CSharp
+        m_MethodName: SetBoostersIconsActivity
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4686,7 +4793,7 @@ RectTransform:
   - {fileID: 1828540562}
   - {fileID: 361532349}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4726,7 +4833,7 @@ RectTransform:
   - {fileID: 2122267497}
   - {fileID: 865132227}
   m_Father: {fileID: 1533021893}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.026386963, y: 0.77400005}
   m_AnchorMax: {x: 0.10438697, y: 0.8172182}
@@ -4803,6 +4910,18 @@ MonoBehaviour:
       - m_Target: {fileID: 361532348}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 378745304}
+        m_TargetAssemblyTypeName: BoostersManager, Assembly-CSharp
+        m_MethodName: SetBoostersIconsActivity
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5530,7 +5649,7 @@ RectTransform:
   - {fileID: 1763418037}
   - {fileID: 1648182582}
   m_Father: {fileID: 1533021893}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.026386963, y: 0.697}
   m_AnchorMax: {x: 0.10438697, y: 0.7395637}
@@ -5616,6 +5735,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 378745304}
+        m_TargetAssemblyTypeName: BoostersManager, Assembly-CSharp
+        m_MethodName: SetBoostersIconsActivity
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1833981162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5678,12 +5809,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1883401863}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.6233187, y: -1.009144, z: 566.08734}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.4009163, y: 1.9030846, z: 576.3204}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_Father: {fileID: 313466973}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1883401865
 MonoBehaviour:
@@ -5697,8 +5828,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d519b664ca4f6e43868351604422e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _score: 0
-  _coveredScore: 0
+  ScoreCount: 0
+  CoveredScoreCount: 0
   _scoreText: {fileID: 1622047190}
   _coveredScoreText: {fileID: 923566895}
 --- !u!1 &1969000235
@@ -5969,7 +6100,7 @@ Transform:
   - {fileID: 1491220690}
   - {fileID: 360761240}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2122267496
 GameObject:

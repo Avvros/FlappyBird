@@ -1,95 +1,94 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class BoostersManager : MonoBehaviour
 {
-    private Boosters _boosters; // Объект, хранящий иконки способностей.
+    private Boosters Boosters; // Объект, хранящий иконки способностей.
 
-    [SerializeField] private GameObject _gameManager;
-    GameManager _gameManagerHanler;
-    internal float _thisTimeSpeed = 1f; // Буфер, хранящий текущее время.
-
+    [SerializeField] internal GameObject GameManager;
     [SerializeField] private GameObject _boostersObj;
     [SerializeField] private GameObject _scoreCounter;
-    private Score _scoreCounterHandler;
     [SerializeField] private GameObject _doNotUseText; // Текст для несрабатывания способностей.
+    internal GameManager GameManagerHanler;
+    internal float BooferTimeSpeed = 1f; // Буфер, хранящий текущее время.
+    private Score _scoreCounterHandler;
     private Animator anim_doNotUseText;
-   [Header("Skins")]
-    [SerializeField] internal GameObject _bird;
-    [SerializeField] internal GameObject _birdIdle;
-    [SerializeField] internal GameObject _birdBlue;
+
+    [Header("Skins")]
+    [SerializeField] internal GameObject Bird;
+    [SerializeField] internal GameObject BirdIdle;
+    [SerializeField] internal GameObject BirdBlue;
     [Header("Time Slower")]
-    [SerializeField] internal GameObject _timeSlowerIcon;
-    [SerializeField] internal GameObject _timeSlowerTimer;
-    [SerializeField] internal int _timeSlowerCost = 15;
-    [SerializeField] internal Text _timeSlowerCostText;
-    [SerializeField] internal int _timeSlowerDuration = 10;
-    internal bool _isTimeSlow = false;
+    [SerializeField] internal GameObject TimeSlowerIcon;
+    [SerializeField] internal GameObject TimeSlowerTimer;
+    [SerializeField] internal int TimeSlowerCost = 7;
+    [SerializeField] internal Text TimeSlowerCostText;
+    [SerializeField] internal int TimeSlowerDuration = 10;
+    internal bool IsTimeSlow = false;
     [Header("Sheld")]
-    [SerializeField] internal GameObject _birdSheldIcon;
-    [SerializeField] internal GameObject _birdSheld;
-    [SerializeField] internal GameObject _sheldTimer;
-    [SerializeField] internal int _sheldCost = 5;
-    [SerializeField] internal Text _sheldCostText;
-    [SerializeField] internal int _sheldDuration = 15;
+    [SerializeField] internal GameObject BirdSheldIcon;
+    [SerializeField] internal GameObject BirdSheld;
+    [SerializeField] internal GameObject SheldTimer;
+    [SerializeField] internal int SheldCost = 10;
+    [SerializeField] internal Text SheldCostText;
+    [SerializeField] internal int SheldDuration = 7;
     [Header("Ninja Mode")]
-    [SerializeField] internal GameObject _ninjaMaskIcon;
-    [SerializeField] internal GameObject _ninjaMask;
-    [SerializeField] internal GameObject _ninjaTimer;
-    [SerializeField] internal int _ninjaMaskCost = 20;
-    [SerializeField] internal Text _ninjaMaskCostText;
-    [SerializeField] internal int _ninjaMaskDuration = 5;
+    [SerializeField] internal GameObject NinjaMaskIcon;
+    [SerializeField] internal GameObject NinjaMask;
+    [SerializeField] internal GameObject NinjaTimer;
+    [SerializeField] internal int NinjaMaskCost = 15;
+    [SerializeField] internal Text NinjaMaskCostText;
+    [SerializeField] internal int NinjaMaskDuration = 5;
     [Header("Reduce Bird")]
-    [SerializeField] internal GameObject _reduceBirdIcon;
-    [SerializeField] internal GameObject _reduceBirdTimer;
-    [SerializeField] internal int _reduceBirdCost = 15;
-    [SerializeField] internal Text _reduceBirdCostText;
-    [SerializeField] internal int _reduceBirdDuration = 10;
+    [SerializeField] internal GameObject ReduceBirdIcon;
+    [SerializeField] internal GameObject ReduceBirdTimer;
+    [SerializeField] internal int ReduceBirdCost = 15;
+    [SerializeField] internal Text ReduceBirdCostText;
+    [SerializeField] internal int ReduceBirdDuration = 10;
 
 
     void Start()
     {
         // Не трогай!
-        _boosters = _boostersObj.GetComponent<Boosters>();
-        _gameManagerHanler = _gameManager.GetComponent<GameManager>();
+        Boosters = _boostersObj.GetComponent<Boosters>();
+        GameManagerHanler = GameManager.GetComponent<GameManager>();
         anim_doNotUseText = _doNotUseText.GetComponent<Animator>();
         _scoreCounterHandler = _scoreCounter.GetComponent<Score>();
 
         
         // Доавлять при создании способности!!!
-        SetCostText(_timeSlowerCostText, _timeSlowerCost);
-        SetCostText(_sheldCostText, _sheldCost);
-        SetCostText(_ninjaMaskCostText, _ninjaMaskCost);
-        SetCostText(_reduceBirdCostText, _reduceBirdCost);
+        SetCostText(TimeSlowerCostText, TimeSlowerCost);
+        SetCostText(SheldCostText, SheldCost);
+        SetCostText(NinjaMaskCostText, NinjaMaskCost);
+        SetCostText(ReduceBirdCostText, ReduceBirdCost);
 		
 		ChangeBoostersCondition(false);
     }
 
     void Update()
     {
-        if (_bird == null)
+        if (Bird == null)
         {
             ChangeBoostersCondition(false);
         }
     }
     public void ChangeThisTimeSpeed()
     {
-        if (_isTimeSlow)
+        if (IsTimeSlow)
         {
-            _thisTimeSpeed = _gameManagerHanler._gameSpeedMultiplayer / 2;
+            BooferTimeSpeed = GameManagerHanler.GameSpeedMultiplayer / 2;
         }
-        _thisTimeSpeed = _gameManagerHanler._gameSpeedMultiplayer;
+        BooferTimeSpeed = GameManagerHanler.GameSpeedMultiplayer;
     }
     /// <summary>
-    /// Скрыть способности.
+    /// Установить активность способностей в иерархии.
     /// </summary>
     internal void ChangeBoostersCondition(bool condition)
     {
-		_timeSlowerIcon.SetActive(condition);
-		_birdSheldIcon.SetActive(condition);
-		_ninjaMaskIcon.SetActive(condition);
-		_reduceBirdIcon.SetActive(condition);
+		TimeSlowerIcon.SetActive(condition);
+		BirdSheldIcon.SetActive(condition);
+		NinjaMaskIcon.SetActive(condition);
+		ReduceBirdIcon.SetActive(condition);
     }
     /// <summary>
     /// Использовать способность.
@@ -101,23 +100,23 @@ public class BoostersManager : MonoBehaviour
         switch (booster)
         {
             case "TimeDilation":
-                if(GetScore(_timeSlowerCost, out _isBoosterUsed)) _boosters.DoSlowDownTime();
+                if(GetScore(TimeSlowerCost, out _isBoosterUsed)) Boosters.DoSlowDownTime();
                 break;
             case "Sheld":
-                if (GetScore(_sheldCost, out _isBoosterUsed)) _boosters.ActiateSheld();
+                if (GetScore(SheldCost, out _isBoosterUsed)) Boosters.ActiateSheld();
                 break;
             case "NinjaMode":
-                if (GetScore(_ninjaMaskCost, out _isBoosterUsed)) _boosters.ActivateNinjaMode();
+                if (GetScore(NinjaMaskCost, out _isBoosterUsed)) Boosters.ActivateNinjaMode();
                 break;
                     case "ReduceBird":
-                if (GetScore(_reduceBirdCost, out _isBoosterUsed)) _boosters.ActivateReduceBird();
+                if (GetScore(ReduceBirdCost, out _isBoosterUsed)) Boosters.ActivateReduceBird();
                 break;
         }
         if(!_isBoosterUsed)
         {
             ShowDoNotUseText();
             Invoke("HideDoNotUseText", 2); // Через две секунды активирует анимацию скрытного текста.
-            Time.timeScale = _thisTimeSpeed;
+            Time.timeScale = BooferTimeSpeed;
         }
     }
     /// <summary>
@@ -130,10 +129,10 @@ public class BoostersManager : MonoBehaviour
     {
         if (_scoreCounterHandler == null) return _isBoosterUsed = false;
 
-        int _score = _scoreCounterHandler._score;
+        int _score = _scoreCounterHandler.ScoreCount;
         if (_score - boosterCost >= 0)
         {
-            _scoreCounterHandler._score -= boosterCost;
+            _scoreCounterHandler.ScoreCount -= boosterCost;
             return _isBoosterUsed = true;
         }
 
@@ -162,5 +161,17 @@ public class BoostersManager : MonoBehaviour
     private void HideDoNotUseText()
     {
         anim_doNotUseText.SetBool("ShowDoNotUse", false);
+    }
+
+    /// <summary>
+    /// Установить активность способностей в иерархии.
+    /// </summary>
+    /// <param name="activity">Значение активности.</param>
+    public void SetBoostersIconsActivity(bool activity)
+    {
+        TimeSlowerIcon.SetActive(activity);
+        BirdSheldIcon.SetActive(activity);
+        NinjaMaskIcon.SetActive(activity);
+        ReduceBirdIcon.SetActive(activity);
     }
 }
